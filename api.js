@@ -3,7 +3,7 @@ const app = new Application()
 const router = new Router()
 
 /*
-card object expected structure:
+card object structure:
 card = {
     "id": 0,
     "text": "Card Text",
@@ -11,9 +11,9 @@ card = {
 }
 */
 
-cards = []
+let cards = []
 
-counter = 0
+let counter = 0
 
 router
     .get("/cards", context => context.response.body = cards)
