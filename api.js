@@ -18,9 +18,9 @@ let counter = 0;
 cards = [
     ...cards,
     {
-    "id": counter,
     "text": "Drink some Coffee",
     "status": "ToDo",
+    "id": counter,
     }
 ];
 
@@ -30,7 +30,13 @@ router
     .get("/cards", context => context.response.body = cards)
     .get("/cards/:id", context => {
         const index = cards.findIndex(c => c.id == context.params.id);
-        context.response.body = cards[index]
+        if (index >= 0){
+            context.response.body = cards[index]
+        } else {
+            context.response.status = 404
+            context.response.body = `ID ${context.params.id} not found`
+        }
+        
     })
     .post("/cards", async context => {
         const card = await context.request.body({ type: "json" }).value;
@@ -41,20 +47,23 @@ router
             card
         ];
         context.response.body = card
+        context.response.status = 201
     })
     .delete("/cards/:id", context => {
-        const id = context.params.id;
-        cards = cards.filter(p => p.id != id);
+        cards = cards.filter(c => c.id != context.params.id);
+        context.response.status = 200
     })
     .put("/cards/:id", async context => {
-        console.log(context.request);
         const card = await context.request.body({ type: "json" }).value;
-        console.log("id:", context.params.id);
-        console.log("card", card);
         const index = cards.findIndex(c => c.id == context.params.id);
-        card.id = cards[index].id;
-        cards[index] = card;
-        context.response.body = cards[index]
+        if (index >= 0){
+            card.id = cards[index].id;
+            cards[index] = card;
+            context.response.body = cards[index];
+        } else {
+            context.response.status = 404
+            context.response.body = `ID ${context.params.id} not found`
+        }
     });
 
 app.use(router.routes());
