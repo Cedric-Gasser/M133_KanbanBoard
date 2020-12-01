@@ -8,26 +8,28 @@
 
 <body>
     <div class="ui">
-        <div class="lists">
-            <div class="list">
-                <header>ToDo</header>
-                <ul>
-                    <li>List Item</li>
+        <div class="board">
+            <div class="column">
+                <header>To do</header>
+                <ul id="To do">
+                    <li>
+                        <div class="card"></div>
+                    </li>
                     <li>List Item</li>
                 </ul>
                 <footer>+</footer>
             </div>
-            <div class="list">
+            <div class="column">
                 <header>In Progress</header>
-                <ul>
+                <ul id="In progress">
                     <li>List Item</li>
                     <li>List Item</li>
                 </ul>
                 <footer>+</footer>
             </div>
-            <div class="list">
+            <div class="column">
                 <header>Done</header>
-                <ul>
+                <ul id="Done">
                     <li>List Item</li>
                     <li>List Item</li>
                 </ul>
@@ -35,7 +37,7 @@
             </div>
         </div>
     </div>
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

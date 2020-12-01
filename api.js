@@ -19,12 +19,21 @@ cards = [
     ...cards,
     {
     "text": "Drink some Coffee",
-    "status": "ToDo",
+    "status": "To do",
     "id": counter,
     }
 ];
+counter++;
 
-counter++
+cards = [
+    ...cards,
+    {
+    "text": "Do the commit",
+    "status": "In progress",
+    "id": counter,
+    }
+];
+counter++;
 
 router
     .get("/cards", context => context.response.body = cards)
@@ -46,12 +55,12 @@ router
             ...cards,
             card
         ];
-        context.response.body = card
-        context.response.status = 201
+        context.response.body = card;
+        context.response.status = 201;
     })
     .delete("/cards/:id", context => {
         cards = cards.filter(c => c.id != context.params.id);
-        context.response.status = 200
+        context.response.status = 200;
     })
     .put("/cards/:id", async context => {
         const card = await context.request.body({ type: "json" }).value;
@@ -61,8 +70,8 @@ router
             cards[index] = card;
             context.response.body = cards[index];
         } else {
-            context.response.status = 404
-            context.response.body = `ID ${context.params.id} not found`
+            context.response.status = 404;
+            context.response.body = `ID ${context.params.id} not found`;
         }
     });
 
