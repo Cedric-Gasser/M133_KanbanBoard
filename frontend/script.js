@@ -23,17 +23,8 @@ loadColumns = async function (){
     });
 }
 
-document.getElementsByClassName("btnAddCard").addEventListener("click", (event) => {
-    let element = event.target || event.srcElement;
-    let card = {
-        "text": "Drink some Coffee",
-        "status": "To do",
-    }
-    newCard(card);
-});
-
 newCard = async function (card){
-    let response = await fetch('localhost:8000/cards', {
+    let response = fetch('http://localhost:8000/cards', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(card)
@@ -48,3 +39,18 @@ function cardToHtml(card){
 
 //run this to reload all columns (when for example you added a new card..)
 loadColumns();
+
+let btnList = document.getElementsByClassName("btnAddCard");
+for (let btn of btnList) {
+    btn.addEventListener("click", (event) => {
+        let target = event.target || event.srcElement;
+        let status = target.closest('div').querySelector('ul').id;
+        let text = target.closest('div').querySelector('input[type="text"]').value;
+
+        card = {
+            "text": text,
+            "status": status,
+        }
+        newCard(card);
+    });
+}
