@@ -23,8 +23,14 @@ loadColumns = async function (){
     });
 }
 
+
 newCard = async function (card){
-    //to be implemented
+    let response = await fetch('localhost:8000/cards', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(card)
+    });
+    loadColumns();
 }
 
 function cardToHtml(card){
@@ -33,4 +39,4 @@ function cardToHtml(card){
 }
 
 //run this to reload all columns (when for example you added a new card..)
-loadColumns()
+loadColumns();
