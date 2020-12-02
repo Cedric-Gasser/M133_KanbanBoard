@@ -11,34 +11,68 @@ card = {
 }
 */
 
-let cards = []
+let cards = [];
 
-let counter = 0
+let counter = 0;
+
+cards = [
+    ...cards,
+    {
+    "text": "Drink some Coffee",
+    "status": "To do",
+    "id": counter,
+    }
+];
+counter++;
+
+cards = [
+    ...cards,
+    {
+    "text": "Do the commit",
+    "status": "In progress",
+    "id": counter,
+    }
+];
+counter++;
 
 router
     .get("/cards", context => context.response.body = cards)
     .get("/cards/:id", context => {
-        const index = cards.findIndex(c => c.id == id);
-        context.response.body = cards[index]
+        const index = cards.findIndex(c => c.id == context.params.id);
+        if (index >= 0){
+            context.response.body = cards[index]
+        } else {
+            context.response.status = 404
+            context.response.body = `ID ${context.params.id} not found`
+        }
+        
     })
     .post("/cards", async context => {
         const card = await context.request.body({ type: "json" }).value;
         card.id = counter;
+        counter++;
         cards = [
             ...cards,
             card
         ];
-        counter++;
+        context.response.body = card;
+        context.response.status = 201;
     })
     .delete("/cards/:id", context => {
-        const id = context.params.id;
-        cards = cards.filter(p => p.id != id);
+        cards = cards.filter(c => c.id != context.params.id);
+        context.response.status = 200;
     })
     .put("/cards/:id", async context => {
         const card = await context.request.body({ type: "json" }).value;
-        const id = context.params.id;
-        const index = cards.findIndex(c => c.id == id);
-        cards[index] = card;
+        const index = cards.findIndex(c => c.id == context.params.id);
+        if (index >= 0){
+            card.id = cards[index].id;
+            cards[index] = card;
+            context.response.body = cards[index];
+        } else {
+            context.response.status = 404;
+            context.response.body = `ID ${context.params.id} not found`;
+        }
     });
 
 app.use(router.routes());
@@ -48,4 +82,4 @@ app.use(async context => {
       index: "index.html",
     });
   });
-app.listen({ port: 8000 })
+app.listen({ port: 8000 });

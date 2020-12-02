@@ -5,12 +5,12 @@
   line-height: 1.3em;
 }
 
-.lists {
+.board {
   display: flex;
   overflow-x: auto;
 }
 
-.list {
+.column {
   width: 33%;
   padding: 0 10px;
 }
