@@ -18,20 +18,25 @@ let counter = 0;
 cards = [
     ...cards,
     {
-    "text": "Drink some Coffee",
-    "status": "To do",
-    "id": counter,
+        "text": "Drink some Coffee",
+        "status": "To do",
+        "id": counter++,
+    },
+    {
+        "text": "Do the commit",
+        "status": "In progress",
+        "id": counter++,
+    },
+    {
+        "text": "Play some piano",
+        "status": "To do",
+        "id": counter++,
     }
 ];
-counter++;
 
 cards = [
     ...cards,
-    {
-    "text": "Do the commit",
-    "status": "In progress",
-    "id": counter,
-    }
+    
 ];
 counter++;
 
@@ -49,8 +54,7 @@ router
     })
     .post("/cards", async context => {
         const card = await context.request.body({ type: "json" }).value;
-        card.id = counter;
-        counter++;
+        card.id = counter++;
         cards = [
             ...cards,
             card
@@ -67,7 +71,12 @@ router
         const index = cards.findIndex(c => c.id == context.params.id);
         if (index >= 0){
             card.id = cards[index].id;
-            cards[index] = card;
+            if (card.text != undefined) {
+                cards[index].text = card.text;
+            }
+            if (card.status != undefined){
+                cards[index].status = card.status;
+            }
             context.response.body = cards[index];
         } else {
             context.response.status = 404;
