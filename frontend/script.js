@@ -23,6 +23,14 @@ loadColumns = async function (){
     });
 }
 
+document.getElementsByClassName("btnAddCard").addEventListener("click", (event) => {
+    let element = event.target || event.srcElement;
+    let card = {
+        "text": "Drink some Coffee",
+        "status": "To do",
+    }
+    newCard(card);
+});
 
 newCard = async function (card){
     let response = await fetch('localhost:8000/cards', {
