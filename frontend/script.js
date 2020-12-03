@@ -52,7 +52,7 @@ function cardToHtml(card){
     buttonRight.innerText = ">";
     buttonRight.addEventListener("click", event => OnMoveRight(event));
     let buttonDelete = document.createElement('button');
-    buttonDelete.innerText = "delete";
+    buttonDelete.innerText = "×";
 
     div.appendChild(p);
     div.appendChild(buttonLeft);

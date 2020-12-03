@@ -1,7 +1,7 @@
 * {
   margin: 0;
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.3em;
 }
 
@@ -30,21 +30,34 @@ input[type="text"]:focus {
   border: none;
   margin-right: 3px;
   padding-inline-start: 12px;
-  background: linear-gradient(90deg, rgba(238,238,238,1) 0%, rgba(204,204,204,0) 100%);;
+  background: linear-gradient(90deg, rgba(238,238,238,1) 0%, rgba(204,204,204,0) 100%);
 }
 
-input[type="button"], button {
+button {
   font-weight: bold;
   font-size: 18px;
+  padding: 5px;
+  margin: 5% 3% 0% 3%;
+  border: none;
+  border-radius: 5px;
+  width: 27%;
+  outline: none;
+  background-color: white;
+}
+
+button:hover {
+  background: linear-gradient(90deg, rgba(238,238,238,1) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.btnAddCard {
   padding: 10px;
   margin: 10px 10px 10px 0px;
   border-radius: 0px 5px 5px 0px;
-  border: none;
   width: 20%;
-  outline: none;
+  background-color: #eee;
 }
 
-input[type="button"]:hover {
+.btnAddCard:hover {
   background: linear-gradient(90deg, rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%);
 }
 
@@ -78,4 +91,14 @@ li {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .side {
+    width: 12.5%;
+  }
+
+  .column {
+    width: 25%;
+  }
 }
