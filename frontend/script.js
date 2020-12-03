@@ -36,11 +36,9 @@ async function putCard(card, id){
 }
 
 // delete card in backend and reload
-async function deleteCard(card, id){
+async function deleteCard(id){
     fetch(`/cards/${id}`, {
         method: 'delete',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(card)
     });
     getCards();
 }
@@ -110,15 +108,8 @@ let OnMoveRight = (event) => {
 
 let OnDelete = (event) => {
     let target = event.target || event.srcElement;
-    let status = target.closest('ul').id;
     let id = target.closest('div').id;
-    let card = {"status": status};
-    fetch(`http://localhost:8000/cards/${id}`, {
-        method: 'put',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(card)
-    });
-    deleteCard(card, id);
+    deleteCard(id);
 }
 
 // getting the unordered lists
