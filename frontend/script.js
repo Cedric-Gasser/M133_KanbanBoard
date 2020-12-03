@@ -35,6 +35,16 @@ async function putCard(card, id){
     getCards();
 }
 
+// delete card in backend and reload
+async function deleteCard(card, id){
+    fetch(`http://localhost:8000/cards/${id}`, {
+        method: 'delete',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(card)
+    });
+    getCards();
+}
+
 // converts json card to html object
 function cardToHtml(card){
     let li = document.createElement('li');
@@ -53,6 +63,7 @@ function cardToHtml(card){
     buttonRight.addEventListener("click", event => OnMoveRight(event));
     let buttonDelete = document.createElement('button');
     buttonDelete.innerText = "×";
+    buttonDelete.addEventListener("click", event => OnDelete(event))
 
     div.appendChild(p);
     div.appendChild(buttonLeft);
@@ -104,7 +115,16 @@ let OnMoveRight = (event) => {
 }
 
 let OnDelete = (event) => {
-    // to be implemented <----
+    let target = event.target || event.srcElement;
+    let status = target.closest('ul').id;
+    let id = target.closest('div').id;
+    let card = {"status": status};
+    fetch(`http://localhost:8000/cards/${id}`, {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(card)
+    });
+    deleteCard(card, id);
 }
 
 // getting the unordered lists
