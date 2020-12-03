@@ -7,7 +7,6 @@
 
 .board {
   display: flex;
-  overflow-x: auto;
 }
 
 .column {
@@ -35,12 +34,12 @@ input[type="text"]:focus {
 
 button {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
   padding: 5px;
   margin: 5% 3% 0% 3%;
   border: none;
   border-radius: 5px;
-  width: 27%;
+  width: 94%;
   outline: none;
   background-color: white;
 }
@@ -67,6 +66,7 @@ header {
   font-size: 30px;
   font-weight: bold;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 footer {
@@ -80,11 +80,12 @@ footer {
 }
 
 ul {
+  border-radius: 5px;
   list-style: none;
   margin: 0;
   overflow-y: auto;
   padding-inline-start: 0px;
-  min-height: 90px;
+  min-height: 105px;
 }
 
 li {
@@ -92,6 +93,10 @@ li {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
+}
+
+li:hover {
+  background: linear-gradient(90deg, rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%);
 }
 
 @media only screen and (min-width: 1200px) {

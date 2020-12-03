@@ -57,19 +57,11 @@ function cardToHtml(card){
     let p = document.createElement('p');
     p.innerText = card.text;
 
-    let buttonLeft = document.createElement('button');
-    buttonLeft.innerText = "<";
-    buttonLeft.addEventListener("click", event => OnMoveLeft(event));
-    let buttonRight = document.createElement('button');
-    buttonRight.innerText = ">";
-    buttonRight.addEventListener("click", event => OnMoveRight(event));
     let buttonDelete = document.createElement('button');
     buttonDelete.innerText = "×";
-    buttonDelete.addEventListener("click", event => OnDelete(event))
+    buttonDelete.addEventListener("click", event => OnDelete(event));
 
     div.appendChild(p);
-    div.appendChild(buttonLeft);
-    div.appendChild(buttonRight);
     div.appendChild(buttonDelete);
 
     li.appendChild(div);
