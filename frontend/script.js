@@ -119,6 +119,7 @@ for (columnDiv of document.getElementsByClassName('column')){
     columns[ul.id] = ul;
     ul.ondragover = (event) => allowDrop(event);
     ul.ondrop = (event) => drop(event);
+    ul.ondragleave = (event) => leave(event);
 }
 
 // Add Eventhandlers
@@ -137,6 +138,7 @@ for (let btn of txtAddCardList) {
 
 // Drag n' Drop
 let allowDrop = (event) => {
+    event.currentTarget.style = "border-color: #eee";
     event.preventDefault();
 }
 
@@ -145,12 +147,17 @@ let drag = (event) => {
 }
 
 let drop = (event) => {
+    event.currentTarget.style = "border-color: white";
     event.preventDefault();
     let id = event.dataTransfer.getData("text");
     event.target.closest('ul').appendChild(document.getElementById(id));
     card = {"status": event.target.closest('ul').id};
     putCard(card, id);
-  }
+}
+
+let leave = (event) => {
+  event.currentTarget.style = "border-color: white";
+};
 
 // load cards at start
 getCards();

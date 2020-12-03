@@ -80,12 +80,15 @@ footer {
 }
 
 ul {
-  border-radius: 5px;
+  border-radius: 7.5px;
+  border-style: dashed;
+  border-color: white;
+  border-width: 3px;
   list-style: none;
   margin: 0;
   overflow-y: auto;
   padding-inline-start: 0px;
-  min-height: 105px;
+  min-height: 50px;
 }
 
 li {
