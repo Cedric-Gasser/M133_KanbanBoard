@@ -17,7 +17,7 @@ async function getCards(){
 
 // post card to backend and reloads
 async function postCard(card){
-    fetch('http://localhost:8000/cards', {
+    fetch('/cards', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(card)
@@ -27,7 +27,7 @@ async function postCard(card){
 
 // put card to backend and reload
 async function putCard(card, id){
-    fetch(`http://localhost:8000/cards/${id}`, {
+    fetch(`/cards/${id}`, {
         method: 'put',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(card)
@@ -37,7 +37,7 @@ async function putCard(card, id){
 
 // delete card in backend and reload
 async function deleteCard(card, id){
-    fetch(`http://localhost:8000/cards/${id}`, {
+    fetch(`/cards/${id}`, {
         method: 'delete',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(card)
@@ -48,6 +48,8 @@ async function deleteCard(card, id){
 // converts json card to html object
 function cardToHtml(card){
     let li = document.createElement('li');
+    li.draggable="true";
+    li.ondragstart = (event) => drag(event);
     let div = document.createElement('div');
     div.id = card.id;
     div.class = "card";
@@ -132,6 +134,8 @@ let columns = {};
 for (columnDiv of document.getElementsByClassName('column')){
     let ul = columnDiv.querySelector('ul');
     columns[ul.id] = ul;
+    ul.ondragover = (event) => allowDrop(event);
+    ul.ondrop = (event) => drop(event);
 }
 
 // Add Eventhandlers
@@ -147,6 +151,23 @@ for (let btn of txtAddCardList) {
         }
     });
 }
+
+// Drag n' Drop
+let allowDrop = (event) => {
+    event.preventDefault();
+}
+
+let drag = (event) => {
+    event.dataTransfer.setData("text", event.target.querySelector('div').id);
+}
+
+let drop = (event) => {
+    event.preventDefault();
+    let id = event.dataTransfer.getData("text");
+    event.target.closest('ul').appendChild(document.getElementById(id));
+    card = {"status": event.target.closest('ul').id};
+    putCard(card, id);
+  }
 
 // load cards at start
 getCards();

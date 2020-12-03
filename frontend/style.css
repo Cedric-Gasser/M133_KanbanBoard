@@ -84,6 +84,7 @@ ul {
   margin: 0;
   overflow-y: auto;
   padding-inline-start: 0px;
+  min-height: 90px;
 }
 
 li {
