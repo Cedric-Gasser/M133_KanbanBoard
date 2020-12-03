@@ -57,7 +57,7 @@ function cardToHtml(card){
 
     let buttonDelete = document.createElement('button');
     buttonDelete.innerText = "×";
-    buttonDelete.addEventListener("click", event => OnDelete(event));
+    buttonDelete.addEventListener("click", event => OnDeleteCard(event));
 
     div.appendChild(p);
     div.appendChild(buttonDelete);
@@ -80,33 +80,7 @@ let OnAddCard = (event) => {
     postCard(card);
 }
 
-let OnMoveLeft = (event) => {
-    let target = event.target || event.srcElement;
-    let status = target.closest('ul').id;
-    let id = target.closest('div').id;
-    let card = {"status": status};
-    if (status == "In progress") {
-        card.status = "To do";
-    } else if (status == "Done") {
-        card.status = "In progress";
-    }
-    putCard(card, id);
-}
-
-let OnMoveRight = (event) => {
-    let target = event.target || event.srcElement;
-    let status = target.closest('ul').id;
-    let id = target.closest('div').id;
-    let card = {"status": status};
-    if (status == "To do") {
-        card.status = "In progress";
-    } else if (status == "In progress") {
-        card.status = "Done";
-    }
-    putCard(card, id);
-}
-
-let OnDelete = (event) => {
+let OnDeleteCard = (event) => {
     let target = event.target || event.srcElement;
     let id = target.closest('div').id;
     deleteCard(id);
